@@ -20,7 +20,7 @@ import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { homedir, tmpdir } from 'node:os'
-import { join } from 'node:path'
+import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { BUILTIN_SKILLS, DEFAULT_SKILL_DIR, normalizeSkillText, syncBuiltinSkills } from '../lib/coi/skills-sync.js'
 import { resolveConfig } from '../lib/index.js'
@@ -29,7 +29,7 @@ import { resolveConfig } from '../lib/index.js'
 const PLUGIN_SKILLS_DIR = fileURLToPath(new URL('../skills/', import.meta.url))
 
 test('DEFAULT_SKILL_DIR 与 resolveConfig() 的哨兵解析必须一致', () => {
-  assert.equal(DEFAULT_SKILL_DIR, join(homedir(), '.agents', 'skills'))
+  assert.equal(DEFAULT_SKILL_DIR, resolve(process.env.DSH_AGENTS_HOME ?? join(homedir(), '.agents'), 'skills'))
   // 未解析的哨兵（默认配置）与显式传哨兵，都必须落到同一个目录
   assert.equal(resolveConfig({}).skillDir, DEFAULT_SKILL_DIR, '默认配置的 skillDir 必须解析成 DEFAULT_SKILL_DIR')
   assert.equal(resolveConfig({ skillDir: null }).skillDir, DEFAULT_SKILL_DIR, '显式 null 哨兵同样解析成默认库')
