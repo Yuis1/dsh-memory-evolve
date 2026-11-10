@@ -1,10 +1,12 @@
+import { authorizedInstaller } from './authorized-context.js'
+const installSkillsManager = authorizedInstaller(native_installSkillsManager)
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { createServer } from 'node:http'
 import { mkdirSync, mkdtempSync, readFileSync, realpathSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import { installSkillsManager } from '../lib/skills-manager.js'
+import { installSkillsManager as native_installSkillsManager } from '../lib/skills-manager.js'
 
 function tempDir() {
   return mkdtempSync(join(tmpdir(), 'dsh-memory-skills-test-'))

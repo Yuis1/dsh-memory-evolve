@@ -1,3 +1,5 @@
+import { authorizedInstaller } from './authorized-context.js'
+const installAdvisor = authorizedInstaller(native_installAdvisor)
 /**
  * 会话评审 opt-in 语义回归测试（2026-08-13 用户拍板）：
  * 1. 全局总闸开启后，每个会话**默认关闭**——不评审、不调模型；
@@ -10,7 +12,7 @@ import assert from 'node:assert/strict'
 import { mkdtempSync, rmSync, readFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import { installAdvisor } from '../lib/advisor/index.js'
+import { installAdvisor as native_installAdvisor } from '../lib/advisor/index.js'
 import { validateRuntimePatch } from '../lib/index.js'
 
 // This suite pins the legacy Chinese output contract; i18n.test.js covers English.

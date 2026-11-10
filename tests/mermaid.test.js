@@ -1,7 +1,9 @@
+import { authorizedInstaller } from './authorized-context.js'
+const installMermaid = authorizedInstaller(native_installMermaid)
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
-import { installMermaid } from '../lib/mermaid.js'
+import { installMermaid as native_installMermaid } from '../lib/mermaid.js'
 
 /**
  * Mermaid 模块宿主端测试：静态端点注册与响应（v1 一期，覆盖：

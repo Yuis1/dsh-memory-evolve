@@ -1,3 +1,4 @@
+import { authorizedContext } from './authorized-context.js'
 /**
  * 会话别名（aliases.json）测试：AliasStore + 快照「你的会话」段 + 主 API。
  */
@@ -88,7 +89,7 @@ test('aliases api: GET 全量 / PUT 设置（校验）/ DELETE 清除', async ()
   const state = { reviewEnabled: true }
   const { installApi } = await import('../lib/api.js')
   const ctx = { webServer: { register: ({ handler }) => { ctx.handler = handler; return () => {} } } }
-  installApi(ctx, {
+  installApi(authorizedContext(ctx), {
     store, archive, queue, todoStore,
     config: { memoryDir: dir },
     getRuntime: () => ({ ...state }),

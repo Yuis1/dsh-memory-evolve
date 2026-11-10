@@ -1,3 +1,5 @@
+import { authorizedInstaller } from './authorized-context.js'
+const installApi = authorizedInstaller(native_installApi)
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { createServer } from 'node:http'
@@ -5,7 +7,7 @@ import { mkdtempSync, readFileSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { ArchiveStore, MemoryStore, SuggestionQueue, isCanonical } from '../lib/store.js'
-import { installApi } from '../lib/api.js'
+import { installApi as native_installApi } from '../lib/api.js'
 import { validateRuntimePatch } from '../lib/index.js'
 import { TodoStore } from '../lib/todo.js'
 

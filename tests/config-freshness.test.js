@@ -1,9 +1,11 @@
+import { authorizedInstaller } from './authorized-context.js'
+const apply = authorizedInstaller(native_apply)
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { mkdtempSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import { apply } from '../lib/index.js'
+import { apply as native_apply } from '../lib/index.js'
 import { MemoryStore } from '../lib/store.js'
 
 function tempDir() {

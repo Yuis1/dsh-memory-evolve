@@ -1,3 +1,5 @@
+import { authorizedInstaller } from './authorized-context.js'
+const installBookmarks = authorizedInstaller(native_installBookmarks)
 /**
  * dsh-memory-evolve — 会话书签模块测试。
  *
@@ -16,17 +18,7 @@ import assert from 'node:assert/strict'
 import { existsSync, mkdtempSync, readdirSync, readFileSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import {
-  BookmarkStore,
-  bookmarksPath,
-  installBookmarks,
-  buildForkSeed,
-  forkSession,
-  parseAnchorKey,
-  resolveAnchorKey,
-  BOOKMARK_LABEL_MAX,
-  BOOKMARKS_PER_SESSION_MAX,
-} from '../lib/bookmarks.js'
+import { BookmarkStore, bookmarksPath, installBookmarks as native_installBookmarks, buildForkSeed, forkSession, parseAnchorKey, resolveAnchorKey, BOOKMARK_LABEL_MAX, BOOKMARKS_PER_SESSION_MAX,  } from '../lib/bookmarks.js'
 import { resolveConfig, validateRuntimePatch, RUNTIME_KEYS } from '../lib/index.js'
 
 function tempDir() {

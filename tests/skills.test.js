@@ -22,12 +22,12 @@ function clean(dir) {
 
 function fakeCtx(overrides = {}) {
   return {
-    get: () => undefined,
+    get: (key) => key === 'approval' ? { request: async () => 'allowed-once' } : undefined,
     ...overrides,
   }
 }
 
-const FAKE_EXEC = () => ({ agent: undefined, callId: 'c1', signal: new AbortController().signal })
+const FAKE_EXEC = () => ({ agent: { session: { header: {} } }, callId: 'c1', signal: new AbortController().signal })
 
 const GOOD_BODY = (name, description) => `---
 name: ${name}

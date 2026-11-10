@@ -1,12 +1,15 @@
+import { authorizedInstaller } from './authorized-context.js'
+const apply = authorizedInstaller(native_apply)
+const installCanvas = authorizedInstaller(native_installCanvas)
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { existsSync, mkdirSync, mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { dirname, join } from 'node:path'
 import { spawnSync } from 'node:child_process'
-import { apply, gitBranch, gitBranchList, inject, resolveConfig, renderSnapshot, resolveRevealTarget, toWindowsPath, RUNTIME_KEYS, validateRuntimePatch } from '../lib/index.js'
+import { apply as native_apply, gitBranch, gitBranchList, inject, resolveConfig, renderSnapshot, resolveRevealTarget, toWindowsPath, RUNTIME_KEYS, validateRuntimePatch } from '../lib/index.js'
 import { setLocale, getLocale } from '../lib/i18n.js'
-import { installCanvas } from '../lib/canvas.js'
+import { installCanvas as native_installCanvas } from '../lib/canvas.js'
 import { PLUGIN_SOURCE_KIND } from '../lib/coi/source.js'
 
 // This suite pins the legacy Chinese output contract; i18n.test.js covers English.

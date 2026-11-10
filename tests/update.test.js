@@ -1,3 +1,5 @@
+import { authorizedInstaller } from './authorized-context.js'
+const installApi = authorizedInstaller(native_installApi)
 /**
  * dsh-memory-evolve — 版本检测与更新模块测试（lib/update.js）。
  *
@@ -661,7 +663,7 @@ async function readTxState(checker) {
 // ---------------------------------------------------------------------------
 
 import { createServer } from 'node:http'
-import { installApi } from '../lib/api.js'
+import { installApi as native_installApi } from '../lib/api.js'
 
 /** 最小 API 服务器（updateOps 用真实 checker 指向 consumer 仓库）。 */
 async function bootUpdateApi(repoDir) {

@@ -1,3 +1,5 @@
+import { authorizedInstaller } from './authorized-context.js'
+const installApi = authorizedInstaller(native_installApi)
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { createServer } from 'node:http'
@@ -7,7 +9,7 @@ import { join } from 'node:path'
 import { TodoStore, TODO_HEADER, TODO_TARGETS, stampTodoLine, todoToolDefinition } from '../lib/todo.js'
 import { ArchiveStore, MemoryStore, SuggestionQueue, projectHash, todayStamp } from '../lib/store.js'
 import { approveSuggestions, archiveSuggestions, enqueueSuggestion, promoteArchived, suggestToolDefinition } from '../lib/review.js'
-import { installApi } from '../lib/api.js'
+import { installApi as native_installApi } from '../lib/api.js'
 
 // This suite pins the legacy Chinese output contract; i18n.test.js covers English.
 import { setLocale } from '../lib/i18n.js'

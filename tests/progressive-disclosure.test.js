@@ -1,10 +1,12 @@
+import { authorizedInstaller } from './authorized-context.js'
+const apply = authorizedInstaller(native_apply)
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { spawnSync } from 'node:child_process'
-import { apply, resolveConfig, renderSnapshot } from '../lib/index.js'
+import { apply as native_apply, resolveConfig, renderSnapshot } from '../lib/index.js'
 import { MemoryStore, projectHash } from '../lib/store.js'
 import { extractEntryId } from '../lib/sync/entryid.js'
 import { approveSuggestions } from '../lib/review.js'

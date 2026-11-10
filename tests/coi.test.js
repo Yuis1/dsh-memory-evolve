@@ -1,3 +1,6 @@
+import { authorizedContext } from './authorized-context.js'
+import { authorizedInstaller } from './authorized-context.js'
+const installCoiApi = authorizedInstaller(native_installCoiApi)
 import { test, after } from 'node:test'
 import assert from 'node:assert/strict'
 import { EventEmitter } from 'node:events'
@@ -15,7 +18,7 @@ import { CoiScheduler } from '../lib/coi/scheduler.js'
 import { coiStats } from '../lib/coi/stats.js'
 import { BroadcastStore, messageToolDefinition } from '../lib/coi/broadcast.js'
 import { coiToolDefinitions } from '../lib/coi/tools.js'
-import { installCoiApi } from '../lib/coi/api.js'
+import { installCoiApi as native_installCoiApi } from '../lib/coi/api.js'
 import { validateCoiRuntimePatch } from '../lib/coi/index.js'
 import { PLUGIN_SOURCE_KIND } from '../lib/coi/source.js'
 import { buildMemoryContext, resolveConfig, renderSnapshot } from '../lib/index.js'
@@ -372,7 +375,7 @@ function bootScheduler(dir, overrides = {}) {
     on: (name, fn) => { ;(listeners[name] ??= []).push(fn); return () => {} },
     off: () => {},
   }
-  const scheduler = new CoiScheduler(eventCtx, {
+  const scheduler = new CoiScheduler(authorizedContext(eventCtx), {
     adapters: stores.adapters,
     sessions: stores.sessions,
     tasks: stores.tasks,
@@ -2340,7 +2343,7 @@ test('broadcast api: 消息列表/全文/删除 + 房间列表/在线/踢人/解
     roomStatus: (room) => (room.members ?? []).map((sid) => presence.get(sid)),
   }
   const ctx = { webServer: { register: ({ handler }) => { ctx.handler = handler; return () => {} } } }
-  installBroadcastApi(ctx, { broadcast, presence })
+  installBroadcastApi(authorizedContext(ctx), { broadcast, presence })
   const server = createServer((req, res) => ctx.handler(req, res))
   await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve))
   const base = `http://127.0.0.1:${server.address().port}`

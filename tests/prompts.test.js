@@ -1,3 +1,5 @@
+import { authorizedInstaller } from './authorized-context.js'
+const installPrompts = authorizedInstaller(native_installPrompts)
 /**
  * dsh-memory-evolve — 提示词管理器（prompts.js）测试。
  *
@@ -10,10 +12,7 @@ import { createServer } from 'node:http'
 import { mkdtempSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import {
-  InjectionStore, PromptStore, SEED_PROMPTS, expandVars,
-  installPrompts, renderInjectionSnapshot,
-} from '../lib/prompts.js'
+import { InjectionStore, PromptStore, SEED_PROMPTS, expandVars, installPrompts as native_installPrompts, renderInjectionSnapshot,  } from '../lib/prompts.js'
 
 // This suite pins the legacy Chinese output contract; i18n.test.js covers English.
 import { setLocale } from '../lib/i18n.js'

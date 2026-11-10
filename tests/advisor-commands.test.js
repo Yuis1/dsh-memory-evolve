@@ -1,9 +1,11 @@
+import { authorizedInstaller } from './authorized-context.js'
+const installAdvisor = authorizedInstaller(native_installAdvisor)
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { mkdtempSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import { installAdvisor } from '../lib/advisor/index.js'
+import { installAdvisor as native_installAdvisor } from '../lib/advisor/index.js'
 import { validateRuntimePatch } from '../lib/index.js'
 
 // This suite pins the legacy Chinese output contract; i18n.test.js covers English.

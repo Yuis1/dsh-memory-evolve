@@ -1,3 +1,5 @@
+import { authorizedInstaller } from './authorized-context.js'
+const installApi = authorizedInstaller(native_installApi)
 /**
  * tests/sync-api.test.js — 记忆同步 UI API 路由测试（记忆同步 Tab 数据面）
  *
@@ -14,7 +16,7 @@ import { createServer } from 'node:http'
 import { mkdtempSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import { installApi } from '../lib/api.js'
+import { installApi as native_installApi } from '../lib/api.js'
 
 // This suite pins the legacy Chinese output contract; i18n.test.js covers English.
 import { setLocale } from '../lib/i18n.js'

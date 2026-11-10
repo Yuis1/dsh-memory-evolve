@@ -1,3 +1,5 @@
+import { authorizedInstaller } from './authorized-context.js'
+const skillManageTool = authorizedInstaller(native_skillManageTool)
 /**
  * English-support i18n tests: dictionary integrity, locale resolution, the
  * live settings/updated switch, and per-locale output of user-facing
@@ -28,7 +30,7 @@ import { MemoryStore } from '../lib/store.js'
 import { memoryTool, renderSnapshot, resolveConfig } from '../lib/index.js'
 import { reviewStatusTool, suggestToolDefinition, reviewTurnCounter } from '../lib/review.js'
 import { todoToolDefinition, TodoStore } from '../lib/todo.js'
-import { skillManageTool } from '../lib/skills.js'
+import { skillManageTool as native_skillManageTool } from '../lib/skills.js'
 import { SuggestionQueue } from '../lib/store.js'
 
 const ALL_DICTS = [

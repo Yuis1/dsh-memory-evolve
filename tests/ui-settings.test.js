@@ -1,3 +1,5 @@
+import { authorizedInstaller } from './authorized-context.js'
+const installUiSettings = authorizedInstaller(native_installUiSettings)
 /**
  * dsh-memory-evolve — DSH UI 设置模块（宿主端）测试。
  *
@@ -6,7 +8,7 @@
  */
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { installUiSettings } from '../lib/ui-settings.js'
+import { installUiSettings as native_installUiSettings } from '../lib/ui-settings.js'
 
 /** 与 plugin.test.js 同款的 fake ctx（inject 对已存在服务立即回调）。 */
 function fakeCtx() {

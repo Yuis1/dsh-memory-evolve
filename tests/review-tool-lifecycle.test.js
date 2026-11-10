@@ -1,10 +1,12 @@
+import { authorizedInstaller } from './authorized-context.js'
+const apply = authorizedInstaller(native_apply)
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { createServer } from 'node:http'
 import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import { apply } from '../lib/index.js'
+import { apply as native_apply } from '../lib/index.js'
 
 function tempDir() {
   return mkdtempSync(join(tmpdir(), 'dsh-memory-review-tools-test-'))

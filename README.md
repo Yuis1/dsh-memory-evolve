@@ -1,5 +1,15 @@
 # dsh-memory-evolve 使用场景指南
 
+此 fork 保留上游功能与 MIT 许可证，基于上游 `44b6b3eb65a1d50ceba0afb2c13acdd4a8b81423`。
+Web 接口要求 DSH 0.2.1-rc.3 的原生 Connection 身份、来源校验和 owner 权限；认证服务缺失时拒绝访问。
+模型发起 COI 外部命令、直接安装或修改活动技能，必须得到原生单次审批；候选技能仍可正常提交并由 owner 批准。
+安装时固定本 fork 已审计提交，保留包名 `dsh-memory-evolve`；上游安装示例仅作原始使用说明。
+
+离线验收：`setsid timeout -k 5s 35s node tests/native-http.e2e.mjs` 验证原生载体和记忆/建议/技能/命令路径；
+`timeout -k 8s 115s python3 scripts/check-native-http.py --plugin-src "$PWD"` 验证整插件原生 CLI 安装与 HTTP。
+两者使用临时 DSH_HOME、合成凭据和有界本地命令，不调用真实模型；临时数据结束后移到 Trash。
+设置 `DSH_RUNTIME`（组件验收）或 `--runtime`（CLI 验收）可指定同版本运行时。
+
 > **一句话**：让 DSH 里的 AI 拥有跨会话的长期记忆、帮你管理待办与技能、还能拉起一群 AI 会话和外部 AI 代理协同干活——**越用越懂你，换会话不丢上下文**。
 >
 > 本指南按真实工作流组织，每个场景讲「适合谁、能做什么、怎么用、会得到什么」。

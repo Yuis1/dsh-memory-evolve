@@ -1,10 +1,12 @@
+import { authorizedInstaller } from './authorized-context.js'
+const installAdvisor = authorizedInstaller(native_installAdvisor)
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { createServer } from 'node:http'
 import { mkdtempSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import { installAdvisor } from '../lib/advisor/index.js'
+import { installAdvisor as native_installAdvisor } from '../lib/advisor/index.js'
 import { DEFAULT_ADVISOR_SYSTEM_PROMPT } from '../lib/advisor/prompt.js'
 import { validateRuntimePatch } from '../lib/index.js'
 
